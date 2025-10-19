@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LXBE | Call me LXBE</title>
+  <meta name="description" content="Sitio oficial de LXBE">
+  <!-- Google Fonts: Inter (estilo Linktree) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    #event-list-view, #event-grid-view {
+      opacity: 1;
+      visibility: visible;
+      transition: none;
+    }
+    #event-list-view.hidden, #event-grid-view.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: none;
+    }
+    .event-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .event-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    /* Custom scrollbar for event slider (mobile) */
+    #event-grid-view {
+      scrollbar-width: thin;
+      scrollbar-color: #eab308 #222;
+    }
+    #event-grid-view::-webkit-scrollbar {
+      height: 8px;
+      background: #222;
+      border-radius: 4px;
+    }
+    #event-grid-view::-webkit-scrollbar-thumb {
+      background: #eab308;
+      border-radius: 4px;
+    }
+    /* Custom scrollbar for music slider (mobile) */
+    .music-slider::-webkit-scrollbar {
+      height: 8px;
+      background: #222;
+      border-radius: 4px;
+    }
+    .music-slider::-webkit-scrollbar-thumb {
+      background: #eab308; /* Tailwind yellow-600 */
+      border-radius: 4px;
+    }
+    .music-slider {
+      scrollbar-width: thin;
+      scrollbar-color: #eab308 #222;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen text-white font-sans p-4 md:p-0" style="font-family: 'Inter', Arial, sans-serif;">
+  <!-- Fondo de video, overlay y glows -->
+  <div class="fixed inset-0 min-h-screen min-w-full -z-10">
+    <!-- Video de fondo -->
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover brightness-[0.4] blur-sm" style="z-index:0;">
+      <source src="VANDANA.mp4" type="video/mp4" />
+    </video>
+    <!-- Overlay de textura -->
+    <div class="absolute inset-0 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/dark-mosaic.png'); opacity: 0.25; z-index:1;"></div>
+    <!-- Glows decorativos y gradient -->
+    <div class="absolute left-1/2 top-1/3 w-[900px] h-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none" style="background: radial-gradient(ellipse at center, rgba(160,60,30,0.32) 0%, rgba(0,0,0,0.0) 75%); filter: blur(48px); z-index:2;"></div>
+    <div class="absolute left-1/2 bottom-0 w-[1100px] h-[500px] -translate-x-1/2 translate-y-1/3 rounded-full pointer-events-none" style="background: radial-gradient(ellipse at center, rgba(100,80,60,0.22) 0%, rgba(0,0,0,0.0) 85%); filter: blur(60px); z-index:2;"></div>
+    <div class="absolute left-[-100px] top-[-80px] w-[600px] h-[500px] rounded-full pointer-events-none" style="background: radial-gradient(ellipse at top left, rgba(255,255,255,0.22) 0%, rgba(0,0,0,0.0) 85%); filter: blur(56px); z-index:2;"></div>
+    <div class="absolute right-[-140px] top-[-80px] w-[700px] h-[500px] rounded-full pointer-events-none" style="background: radial-gradient(ellipse at top right, rgba(60,160,255,0.32) 0%, rgba(0,0,0,0.0) 85%); filter: blur(60px); z-index:2;"></div>
+    <div class="absolute left-[-120px] bottom-1/4 w-[500px] h-[600px] rounded-full pointer-events-none" style="background: radial-gradient(ellipse at left, rgba(160,140,120,0.16) 0%, rgba(0,0,0,0.0) 85%); filter: blur(48px); z-index:2;"></div>
+    <div class="absolute right-[-120px] bottom-1/3 w-[500px] h-[600px] rounded-full pointer-events-none" style="background: radial-gradient(ellipse at right, rgba(100,160,255,0.22) 0%, rgba(0,0,0,0.0) 85%); filter: blur(52px); z-index:2;"></div>
+    <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at center, rgba(47,41,204,0) 60%, rgba(0,0,0,0.85) 100%); z-index:3;"></div>
+  </div>
+
+  <div class="flex flex-col items-center justify-center min-h-screen px-4">
+    <!-- Header -->
+    <header class="py-20 text-center">
+      <img src="avatar.jpg" alt="LXBE avatar" class="w-32 h-32 mx-auto rounded-full shadow-lg mb-4">
+      <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight">LEXBE</h1>
+      <div class="flex justify-center gap-6 mt-4">
+        <a href="https://instagram.com/alexbemusic" target="_blank" rel="noopener" title="Instagram">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" class="w-6 h-6 md:w-8 h-8" style="filter: brightness(0) invert(1);">
+        </a>
+        <a href="https://soundcloud.com/alexbemusic" target="_blank" rel="noopener" title="SoundCloud">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/soundcloud.svg" alt="SoundCloud" class="w-6 h-6 md:w-8 h-8" style="filter: brightness(0) invert(1);">
+        </a>
+        <a href="https://tiktok.com/@alexbemusicc" target="_blank" rel="noopener" title="TikTok">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" class="w-6 h-6 md:w-8 h-8" style="filter: brightness(0) invert(1);">
+        </a>
+      </div>
+    </header>
+
+    <!-- Calendario de eventos -->
+  <section class="w-full max-w-5xl mx-auto my-10 bg-black/40 backdrop-blur-md rounded-lg p-6">
+      <div>
+        <div class="flex justify-between border-b border-gray-700 pb-2 mb-4">
+          <div>
+            <span class="text-white text-lg md:text-2xl font-semibold">Upcoming Shows</span>
+          </div>
+          <div class="flex gap-3">
+            <button id="toggle-view" type="button" class="text-white hover:text-yellow-600 px-3 py-2" title="Cambiar vista">
+              <svg id="icon-view" width="20" height="20" fill="currentColor">
+                <path d="M18 2h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm0 5h-3V4h3v3zM5 2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm0 5H2V4h3v3zm13 6h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2zm0 5h-3v-3h3v3zM5 13H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2zm0 5H2v-3h3v3z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div>
+          <!-- Eventos en lista -->
+          <div id="event-list-view" class="py-6">
+            <!-- Evento 1 -->
+            <div class="flex flex-col md:flex-row items-center justify-between py-4">
+              <div class="flex items-center gap-6 w-full md:w-auto">
+                <div class="text-4xl font-bold text-yellow-600 text-center md:text-left w-16">25 <span class="block text-base font-normal text-gray-400">Oct</span></div>
+                <img src="logo-beachparty.png" alt="Logo Beach Party" class="w-12 h-12 object-cover mb-2">
+                <div class="flex flex-col">
+                  <span class="font-semibold text-lg text-white">Club XYZ</span>
+                  <span class="text-gray-400 text-sm flex items-center gap-2">
+                    Madrid, España
+                    <!-- Reemplazo del icono de indicaciones/ruta por mapa.png en amarillo -->
+                    <a href="https://maps.google.com/?q=Madrid, España" target="_blank" class="inline-block align-middle" title="Cómo llegar">
+                      <img src="mapa.png" alt="Cómo llegar" class="w-5 h-5 inline" style="filter: brightness(0) saturate(100%) invert(86%) sepia(41%) saturate(743%) hue-rotate(1deg) brightness(105%) contrast(101%);">
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div class="flex gap-3 mt-4 md:mt-0">
+                <a href="#" class="bg-black text-white border border-white border-[1px] rounded transition hover:bg-white hover:text-black px-6 py-2">Guest List</a>
+                <a href="#" class="bg-black text-white border border-white border-[1px] rounded transition hover:bg-white hover:text-black px-6 py-2 flex items-center justify-center">Tickets</a>
+              </div>
+            </div>
+            <!-- Evento 2 -->
+            <div class="flex flex-col md:flex-row items-center justify-between py-4">
+              <div class="flex items-center gap-6 w-full md:w-auto">
+                <div class="text-4xl font-bold text-yellow-600 text-center md:text-left w-16">10 <span class="block text-base font-normal text-gray-400">Nov</span></div>
+                <img src="logo-beachparty.png" alt="Logo Beach Party" class="w-12 h-12 object-cover mb-2">
+                <div class="flex flex-col">
+                  <span class="font-semibold text-lg text-white">Festival AfroBeats</span>
+                  <span class="text-gray-400 text-sm flex items-center gap-2">
+                    Barcelona, España
+                    <!-- Reemplazo del icono de indicaciones/ruta por mapa.png en amarillo -->
+                    <a href="https://maps.google.com/?q=Barcelona, España" target="_blank" class="inline-block align-middle" title="Cómo llegar">
+                      <img src="mapa.png" alt="Cómo llegar" class="w-5 h-5 inline" style="filter: brightness(0) saturate(100%) invert(86%) sepia(41%) saturate(743%) hue-rotate(1deg) brightness(105%) contrast(101%);">
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div class="flex gap-3 mt-4 md:mt-0">
+                <a href="#" class="bg-black text-white border border-white border-[1px] rounded transition hover:bg-white hover:text-black px-6 py-2">Guest List</a>
+                <a href="#" class="bg-black text-white border border-white border-[1px] rounded transition hover:bg-white hover:text-black px-6 py-2 flex items-center justify-center">Tickets</a>
+              </div>
+            </div>
+            <!-- Evento 3 -->
+            <div class="flex flex-col md:flex-row items-center justify-between py-4">
+              <div class="flex items-center gap-6 w-full md:w-auto">
+                <div class="text-4xl font-bold text-yellow-600 text-center md:text-left w-16">5 <span class="block text-base font-normal text-gray-400">Dic</span></div>
+                <img src="logo-beachparty.png" alt="Logo Beach Party" class="w-12 h-12 object-cover mb-2">
+                <div class="flex flex-col">
+                  <span class="font-semibold text-lg text-white">Beach Party</span>
+                  <span class="text-gray-400 text-sm flex items-center gap-2">
+                    Valencia, España
+                    <!-- Reemplazo del icono de indicaciones/ruta por mapa.png en amarillo -->
+                    <a href="https://maps.google.com/?q=Valencia, España" target="_blank" class="inline-block align-middle" title="Cómo llegar">
+                      <img src="mapa.png" alt="Cómo llegar" class="w-5 h-5 inline" style="filter: brightness(0) saturate(100%) invert(86%) sepia(41%) saturate(743%) hue-rotate(1deg) brightness(105%) contrast(101%);">
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div class="flex gap-3 mt-4 md:mt-0">
+                <a href="#" class="bg-black text-white border border-white border-[1px] rounded transition hover:bg-white hover:text-black px-6 py-2">Guest List</a>
+                <a href="#" class="bg-black text-white border border-white border-[1px] rounded transition hover:bg-white hover:text-black px-6 py-2 flex items-center justify-center">Tickets</a>
+              </div>
+            </div>
+          </div>
+          <!-- Eventos en grid -->
+          <div id="event-grid-view" class="flex flex-row space-x-6 overflow-x-auto snap-x snap-mandatory md:grid md:space-x-0 md:overflow-x-visible md:snap-none event-grid" style="display: none; touch-action: pan-x; -webkit-overflow-scrolling: touch;">
+            <div class="w-full text-center text-xs text-yellow-400 mb-2 md:hidden">Desliza para ver más eventos &rarr;</div>
+            <!-- Evento 1 -->
+            <div class="p-6 flex flex-col items-center min-w-[80vw] max-w-[400px] snap-center md:min-w-0 md:max-w-none md:snap-none">
+              <div class="text-4xl font-bold text-yellow-400 mb-2">25 <span class="inline-block text-base font-normal text-gray-400">Oct</span></div>
+                <img src="logo-beachparty.png" alt="Logo Beach Party" class="w-12 h-12 object-cover mb-2">
+              <div class="font-semibold text-lg text-white mb-1">Club XYZ</div>
+              <div class="text-gray-400 text-sm mb-4 flex items-center gap-2">
+                Madrid, España
+                <a href="https://maps.google.com/?q=Madrid, España" target="_blank" class="inline-block align-middle" title="Cómo llegar">
+                      <img src="mapa.png" alt="Cómo llegar" class="w-5 h-5 inline" style="filter: brightness(0) saturate(100%) invert(86%) sepia(41%) saturate(743%) hue-rotate(1deg) brightness(105%) contrast(101%);">
+                </a>
+              </div>
+              <div class="flex gap-2 w-full justify-center">
+                <a href="#" class="bg-black text-white border border-white border-[1px] rounded transition hover:bg-white hover:text-black px-4 py-1 text-sm">Guest List</a>
+                <a href="#" class="bg-black text-white border border-white border-[1px] rounded transition hover:bg-white hover:text-black px-4 py-1 text-sm flex items-center justify-center">Tickets</a>
+              </div>
+            </div>
+            <!-- Evento 2 -->
+            <div class="p-6 flex flex-col items-center min-w-[80vw] max-w-[400px] snap-center md:min-w-0 md:max-w-none md:snap-none">
+              <div class="text-4xl font-bold text-yellow-400 mb-2">10 <span class="inline-block text-base font-normal text-gray-400">Nov</span></div>
+                <img src="logo-beachparty.png" alt="Logo Beach Party" class="w-12 h-12 object-cover mb-2">
+              <div class="font-semibold text-lg text-white mb-1">Festival AfroBeats</div>
+              <div class="text-gray-400 text-sm mb-4 flex items-center gap-2">
+                Barcelona, España
+                <a href="https://maps.google.com/?q=Barcelona, España" target="_blank" class="inline-block align-middle" title="Cómo llegar">
+                      <img src="mapa.png" alt="Cómo llegar" class="w-5 h-5 inline" style="filter: brightness(0) saturate(100%) invert(86%) sepia(41%) saturate(743%) hue-rotate(1deg) brightness(105%) contrast(101%);">
+                </a>
+              </div>
+              <div class="flex gap-2 w-full justify-center">
+                <a href="#" class="bg-black text-white border border-white border-[1px] rounded transition hover:bg-white hover:text-black px-4 py-1 text-sm">Guest List</a>
+                <a href="#" class="bg-black text-white border border-white border-[1px] rounded transition hover:bg-white hover:text-black px-4 py-1 text-sm flex items-center justify-center">Tickets</a>
+              </div>
+            </div>
+            <!-- Evento 3 -->
+            <div class="p-6 flex flex-col items-center min-w-[80vw] max-w-[400px] snap-center md:min-w-0 md:max-w-none md:snap-none">
+              <div class="text-4xl font-bold text-yellow-400 mb-2">5 <span class="inline-block text-base font-normal text-gray-400">Dic</span></div>
+                <img src="logo-beachparty.png" alt="Logo Beach Party" class="w-12 h-12 object-cover mb-2">
+              <div class="font-semibold text-lg text-white mb-1">Beach Party</div>
+              <div class="text-gray-400 text-sm mb-4 flex items-center gap-2">
+                Valencia, España
+                <a href="https://maps.google.com/?q=Valencia, España" target="_blank" class="inline-block align-middle" title="Cómo llegar">
+                      <img src="mapa.png" alt="Cómo llegar" class="w-5 h-5 inline" style="filter: brightness(0) saturate(100%) invert(86%) sepia(41%) saturate(743%) hue-rotate(1deg) brightness(105%) contrast(101%);">
+                </a>
+              </div>
+              <div class="flex gap-2 w-full justify-center">
+                <a href="#" class="bg-black text-white border border-white border-[1px] rounded transition hover:bg-white hover:text-black px-4 py-1 text-sm">Guest List</a>
+                <a href="#" class="bg-black text-white border border-white border-[1px] rounded transition hover:bg-white hover:text-black px-4 py-1 text-sm flex items-center justify-center">Tickets</a>
+              </div>
+            </div>
+
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Embeds: SoundCloud, Instagram, Mixcloud -->
+  <section class="w-full max-w-5xl mx-auto my-10 bg-black/40 backdrop-blur-md rounded-lg p-6">
+      <div class="border-b border-gray-700 pb-2 mb-4 text-left w-full">
+          <div>
+            <span class="text-white text-lg md:text-2xl font-semibold">Music</span>
+          </div>
+        </div>
+      <div class="flex flex-row space-x-6 overflow-x-auto px-4 gap-8 w-full mt-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:space-x-0 md:overflow-x-visible md:px-0 md:snap-none music-slider" style="touch-action: pan-x; -webkit-overflow-scrolling: touch;">
+        <!-- SoundCloud Embed -->
+  <div class="rounded-xl overflow-hidden shadow-lg aspect-w-16 aspect-h-9 min-w-[80vw] max-w-[400px] snap-center md:min-w-0 md:max-w-none md:snap-none">
+          <iframe class="w-full h-full min-h-[200px]" style="min-height:200px;" allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/alexbemusic&color=%230066cc&auto_play=false&show_artwork=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+            frameborder="0" scrolling="no"></iframe>
+        </div>
+        <!-- Mixcloud Embed -->
+  <div class="rounded-xl overflow-hidden aspect-w-16 aspect-h-9 min-w-[80vw] max-w-[400px] snap-center md:min-w-0 md:max-w-none md:snap-none">
+          <iframe class="w-full h-full min-h-[200px]" style="min-height:200px;" frameborder="0" allow="autoplay"
+            src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=0&feed=%2Falexbemusic%2Fthe-bowery-nyc-afro-house-session%2F"></iframe>
+        </div>
+        <!-- Instagram Embed -->
+  <div class="rounded-xl overflow-hidden shadow-lg aspect-w-9 aspect-h-16 min-w-[80vw] max-w-[400px] snap-center md:min-w-0 md:max-w-none md:snap-none">
+          <iframe class="w-full h-full min-h-[400px]" style="min-height:400px;" src="https://www.instagram.com/alexbemusic/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        </div>
+      </div>
+    <div class="w-full text-center text-xs text-yellow-400 mt-6 md:hidden">Swipe for more &rarr;</div>
+
+    </section>
+
+    <!-- Formulario de contacto moderno -->
+  <section class="w-full max-w-5xl mx-auto my-10 bg-black/40 backdrop-blur-md rounded-lg p-6">
+    <div class="border-b border-gray-700 pb-2 mb-4 text-left w-full">
+          <div>
+            <span class="text-white text-lg md:text-2xl font-semibold">Contact</span>
+          </div>
+        </div>
+      <form class="py-6 flex flex-col gap-4" name="contact" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact">
+        <input type="text" name="name" placeholder="Name" required class="text-white px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600">
+        <input type="email" name="email" placeholder="Email" required class="text-white px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600">
+        <textarea name="message" placeholder="Message" rows="4" required class="text-white px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"></textarea>
+        <button type="submit" class="bg-black text-white border border-white border font-bold py-3 rounded hover:bg-yellow-600 hover:text-black hover:border-yellow-600 transition">Send</button>
+      </form>
+    </section>
+
+    <!-- Footer legal -->
+    <footer class=" py-8 w-full text-center text-gray-400 text-xs ">
+      <div class="mb-4">&copy; 2025 Alex Esteban Calvo. Todos los derechos reservados.</div>
+      <div class="text-xs text-gray-600">Sitio web informativo para promoción musical. No se recogen datos personales sin consentimiento.</div>
+      <div class="flex flex-row md:flex-wrap justify-center gap-4 mt-4">
+        <button data-legal="aviso" class="text-white rounded transition hover:text-yellow-600 px-2 underline legal-link">Aviso Legal</button>
+        <button data-legal="privacidad" class="text-white rounded transition hover:text-yellow-600 px-2 underline legal-link">Política de Privacidad</button>
+        <button data-legal="cookies" class="text-white rounded transition hover:text-yellow-600 px-2 underline legal-link">Política de Cookies</button>
+      </div>
+    </footer>
+
+    <!-- Modal legal -->
+    <div id="legal-modal" class="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center hidden">
+      <div class="bg-black rounded-xl p-8 shadow-2xl max-w-2xl w-full relative text-gray-200">
+        <button id="legal-close" class="absolute top-4 right-4 text-white rounded transition hover:text-yellow-600 px-2 text-2xl">&times;</button>
+        <div id="legal-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
